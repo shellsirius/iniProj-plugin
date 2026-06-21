@@ -28,10 +28,10 @@ echo "PLUGIN_ROOT=$CLAUDE_PLUGIN_ROOT"
 ```
 
 - 若 `$CLAUDE_PLUGIN_ROOT` 有值且 `"$CLAUDE_PLUGIN_ROOT/template"` 存在 → 來源 = `$CLAUDE_PLUGIN_ROOT/template`。
-- 若為空或不存在，改用搜尋（plugin 安裝在快取目錄）：
+- 若為空或不存在，改用搜尋（plugin 安裝在快取目錄，實際路徑形如 `~/.claude/plugins/cache/iniproj/iniproj/<版本>/template`，版本層數不固定，故用遞迴 find）：
   - macOS/Linux：
     ```bash
-    ls -d ~/.claude/plugins/*/iniproj/template ~/.claude/plugins/cache/*/iniproj/template ~/.claude/plugins/**/iniproj*/template 2>/dev/null | head -1
+    find ~/.claude/plugins -type d -name template -path '*iniproj*' 2>/dev/null | head -1
     ```
   - Windows（PowerShell）：
     ```powershell
