@@ -626,7 +626,7 @@ const CONFIG = [
 ];
 
 /* ===================== 狀態與工具 ===================== */
-const LS='spec-kit-v1';
+const LS='spec-kit-v1::'+location.pathname;   // 依專案資料夾路徑命名空間，避免不同專案 localStorage 互相污染
 let cur=0;
 let showTech=true;
 let _allDone=false;const _done={};const _full={};
@@ -924,7 +924,7 @@ document.getElementById('mobPvBtn').onclick=()=>{setPreview(!document.getElement
 document.getElementById('pvClose').onclick=()=>{setPreview(false);};
 
 /* intro / welcome */
-const SEEN='spec-kit-seen-v1';
+const SEEN='spec-kit-seen-v1::'+location.pathname;   // 同上：開場頁「看過」狀態也按專案隔離
 const introEl=document.getElementById('intro');
 document.getElementById('introStart').onclick=()=>{introEl.classList.remove('show');localStorage.setItem(SEEN,'1');};
 document.getElementById('aboutBtn').onclick=()=>{introEl.classList.add('show');};
