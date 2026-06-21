@@ -11,7 +11,8 @@
 | 角色 | 要做的事 |
 |---|---|
 | 維護者 | 改 `version` → `validate` → commit → push |
-| 團隊成員 | `marketplace update` → `plugin update` → 重啟 Claude Code |
+| 團隊成員（手動） | `marketplace update` → `plugin update` → 重啟 Claude Code |
+| 團隊成員（免手動） | 開 `autoUpdate`，啟動時自動更新 → 按 `/reload-plugins`（見 C） |
 
 ---
 
@@ -53,7 +54,9 @@ claude plugin tag plugins/iniproj
 
 ---
 
-## B. 團隊成員：更新已安裝的 plugin
+## B. 團隊成員：手動更新已安裝的 plugin
+
+> 不想每次手動？跳到 **C. 自動更新**，設一次以後就免管。
 
 兩步，**順序有意義**：先更新 marketplace（重新拉 GitHub 上的版本資訊），再更新 plugin。
 
@@ -74,6 +77,43 @@ claude plugin update iniproj@iniproj         # 再升到最新版
 ```
 claude plugin list        # 看 iniproj 的 Version 是不是最新
 ```
+
+---
+
+## C. 免手動：自動更新（autoUpdate）
+
+在 marketplace 設定加 `"autoUpdate": true`，Claude Code 會在**啟動時自動 `git pull` marketplace 並更新已裝的 plugin**；更新後跳通知請你按 `/reload-plugins` 套用（**不必重開**整個 Claude Code）。
+
+### 個人開（自己的 `~/.claude/settings.json`）
+```json
+{
+  "extraKnownMarketplaces": {
+    "iniproj": {
+      "source": { "source": "github", "repo": "shellsirius/iniProj-plugin" },
+      "autoUpdate": true
+    }
+  }
+}
+```
+或在 `/plugin` 選單 → Marketplaces → 選 `iniproj` → 開 auto-update。
+
+### 團隊開（推薦：共享專案的 `.claude/settings.json`）
+把這段 commit 進團隊**共享專案**的 `.claude/settings.json`。成員打開該專案、**信任資料夾一次**後，往後每次啟動自動跟上最新版：
+```json
+{
+  "extraKnownMarketplaces": {
+    "iniproj": {
+      "source": { "source": "github", "repo": "shellsirius/iniProj-plugin" },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "iniproj@iniproj": true
+  }
+}
+```
+
+> ⚠️ **`enabledPlugins` 只「標記啟用」，不會自動安裝。** 成員**第一次仍要 `install` 一次**（見下方「首次安裝」；容器／CI 可用 `CLAUDE_CODE_PLUGIN_SEED_DIR` 預先塞）。裝好後就靠 `autoUpdate` 自動更新，不用再自己檢查。
 
 ---
 
