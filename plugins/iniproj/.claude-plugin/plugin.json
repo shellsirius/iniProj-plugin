@@ -1,6 +1,6 @@
 {
   "name": "iniproj",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "開新專案啟動器：在指定路徑長出 PM 專案起始範本包（PM/PRD/SA/SRS 流程＋自帶 skills）。",
   "author": {
     "name": "Sharon",
