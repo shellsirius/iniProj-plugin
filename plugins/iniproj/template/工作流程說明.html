@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新 PM 入職 · 開一個新案的流程</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F8F4EC; --paper-2:#F0E9DB; --card:#FFFDF8;
+  --ink:#574A3E; --ink-soft:#8A7B6A; --ink-faint:#B3A693;
+  --accent:#E08D80; --accent-2:#E0A95E; --accent-wash:#FBE7E1;
+  --ok:#4E9A7E; --ok-wash:#E5F0EA;
+  --line:rgba(87,74,62,.13); --line-2:rgba(87,74,62,.06);
+  --radius:18px;
+  --shadow:0 2px 4px rgba(87,74,62,.05),0 16px 40px -22px rgba(209,122,102,.30);
+  --mono:"DM Mono",ui-monospace,monospace;
+  --bar-h:58px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Sans TC",system-ui,sans-serif;
+  background:var(--paper); color:var(--ink); line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(680px 440px at 94% -8%,rgba(224,141,128,.18),transparent 62%),
+    radial-gradient(560px 460px at 4% 4%,rgba(224,169,94,.14),transparent 60%),
+    radial-gradient(760px 520px at 50% 124%,rgba(78,154,126,.14),transparent 60%);
+  background-attachment:fixed;
+}
+
+/* ── top bar ── */
+.topbar{position:sticky;top:0;z-index:60;backdrop-filter:blur(10px);
+  background:rgba(244,242,234,.82);border-bottom:1px solid var(--line)}
+.bar-inner{max-width:1180px;margin:0 auto;padding:0 clamp(18px,3vw,32px);
+  display:flex;align-items:center;gap:13px;height:var(--bar-h)}
+.logo{font-family:"Zen Maru Gothic",sans-serif;font-weight:600;font-size:13px;
+  letter-spacing:.18em;color:#fff;background:var(--ink);padding:5px 10px;border-radius:9px}
+.topbar h1{font-family:"Zen Maru Gothic","Noto Sans TC",sans-serif;font-weight:600;
+  font-size:clamp(14px,1.7vw,17px)}
+.topbar .sub{color:var(--ink-soft);font-size:12.5px;margin-left:auto}
+@media(max-width:560px){.topbar .sub{display:none}}
+
+/* ── layout shell: rail + content ── */
+.shell{max-width:1180px;margin:0 auto;padding:0 clamp(18px,3vw,32px);
+  display:grid;grid-template-columns:230px minmax(0,1fr);gap:clamp(26px,3.6vw,52px);align-items:start}
+
+/* ── rail / menu ── */
+.rail{position:sticky;top:calc(var(--bar-h) + 22px);align-self:start}
+.rail-cap{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);padding:0 6px 13px;display:flex;align-items:center;gap:8px}
+.rail-cap::before{content:"";width:18px;height:1.5px;background:var(--accent)}
+.nav{display:flex;flex-direction:column;gap:5px}
+.nav-i{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:13px;
+  text-decoration:none;border:1px solid transparent;transition:.16s}
+a.nav-i:hover{background:var(--paper-2);border-color:var(--line)}
+.nav-i.active{background:var(--ink)}
+.nav-i .dot{flex:none;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:12.5px;
+  border:1.5px solid var(--accent);color:var(--accent);background:var(--card);transition:.16s}
+.nav-i.active .dot{background:#fff;border-color:#fff;color:var(--ink)}
+.nav-i.lock .dot{border-style:dashed;border-color:var(--line);color:var(--ink-faint)}
+.nav-i .nx{display:flex;flex-direction:column;line-height:1.28;min-width:0}
+.nav-i .nx b{font-family:"Zen Maru Gothic","Noto Sans TC",sans-serif;font-weight:700;
+  font-size:13.5px;color:var(--ink);white-space:nowrap}
+.nav-i.active .nx b{color:#fff}
+.nav-i.lock .nx b{color:var(--ink-soft)}
+.nav-i .nx i{font-style:normal;font-size:10.5px;color:var(--ink-faint);font-family:var(--mono);white-space:nowrap}
+.nav-i.active .nx i{color:rgba(255,255,255,.6)}
+.nav-i .st{margin-left:auto;flex:none;font-size:9.5px;font-family:var(--mono);letter-spacing:.02em;
+  padding:2px 7px;border-radius:6px;background:var(--paper-2);color:var(--ink-faint)}
+.nav-i .st.ok{background:var(--ok-wash);color:var(--ok)}
+.nav-i.active .st{background:rgba(255,255,255,.16);color:#fff}
+.rail-note{margin-top:14px;padding:11px 12px;border:1px dashed var(--line);border-radius:12px;
+  font-size:11px;color:var(--ink-faint);line-height:1.5}
+
+/* ── hero ── */
+.hero{padding:clamp(34px,5vw,58px) 0 clamp(28px,4vw,42px)}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--accent);
+  text-transform:uppercase;display:flex;align-items:center;gap:9px}
+.kicker::before{content:"";width:26px;height:1.5px;background:var(--accent)}
+.hero h2{font-family:"Zen Maru Gothic","Noto Sans TC",sans-serif;font-weight:700;
+  font-size:clamp(30px,5vw,48px);line-height:1.14;letter-spacing:.01em;margin:16px 0 4px}
+.hero h2 .star{display:inline-block;width:.78em;height:.78em;vertical-align:-.02em;margin-left:.1em;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='40' viewBox='0 0 46 40'%3E%3Cpath d='M14,2C15,9,18,12,25,13C18,14,15,17,14,24C13,17,10,14,3,13C10,12,13,9,14,2Z' fill='%23E0A95E'/%3E%3Cpath d='M34,20C35,25,37,27,42,28C37,29,35,31,34,36C33,31,31,29,26,28C31,27,33,25,34,20Z' fill='%236FAE97'/%3E%3C/svg%3E") center/contain no-repeat}
+.hero .wave{display:inline-block;padding-bottom:14px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='12' viewBox='0 0 90 12'%3E%3Cpath d='M2,6Q9,1,16,6T30,6T44,6T58,6T72,6T86,6' fill='none' stroke='%23E08D80' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") left bottom/auto 9px repeat-x}
+.hero p.lead{color:var(--ink-soft);font-size:clamp(15px,1.9vw,17px);max-width:78ch;margin-top:20px}
+.hero .tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+.tag{font-size:12.5px;font-weight:500;color:var(--ink-soft);background:var(--card);
+  border:1px solid var(--line);padding:6px 13px;border-radius:999px}
+.tag b{color:var(--accent);font-weight:700}
+
+/* ── pipeline ── */
+.pipe{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:clamp(20px,2.6vw,28px)}
+.pipe-flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.node{flex:1;min-width:140px;text-align:center;padding:8px 6px}
+.node .ic{font-size:29px;line-height:1}
+.node .nm{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:15px;margin-top:9px}
+.node .ds{font-size:12px;color:var(--ink-faint);margin-top:3px}
+.node code{font-family:var(--mono);font-size:11.5px;color:var(--ok);background:var(--ok-wash);
+  padding:1px 7px;border-radius:7px;display:inline-block;margin-top:7px}
+.arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 4px;
+  min-width:90px;flex:none}
+.arrow .lab{font-family:var(--mono);font-size:10.5px;color:var(--accent);letter-spacing:.04em;
+  margin-bottom:5px;text-align:center;line-height:1.3}
+.arrow .ln{width:100%;height:0;border-top:2px dashed var(--accent);position:relative}
+.arrow .ln::after{content:"";position:absolute;right:-1px;top:-5px;border-left:8px solid var(--accent);
+  border-top:5px solid transparent;border-bottom:5px solid transparent}
+@media(max-width:620px){
+  .pipe-flow{flex-direction:column}
+  .arrow{min-width:0;flex-direction:row;gap:9px;padding:7px 0}
+  .arrow .ln{width:46px}.arrow .lab{margin:0}
+}
+
+/* ── section heads ── */
+.sec{padding:clamp(36px,5vw,60px) 0 0;scroll-margin-top:calc(var(--bar-h) + 16px)}
+.sec-head{margin-bottom:26px}
+.sec-head h3{font-family:"Zen Maru Gothic","Noto Sans TC",sans-serif;font-weight:700;
+  font-size:clamp(21px,3vw,29px);letter-spacing:.01em;margin:11px 0 6px}
+.sec-head p{color:var(--ink-soft);font-size:14.5px;max-width:78ch}
+
+/* ── steps timeline ── */
+.steps{position:relative;padding-left:6px}
+.steps::before{content:"";position:absolute;left:24px;top:14px;bottom:30px;width:2px;
+  background:linear-gradient(var(--accent),var(--accent-2),var(--ok));opacity:.32;border-radius:2px}
+.step{position:relative;display:flex;gap:20px;padding-bottom:22px;scroll-margin-top:calc(var(--bar-h) + 16px)}
+.step .num{flex:none;width:50px;height:50px;border-radius:50%;background:var(--card);
+  border:2px solid var(--accent);color:var(--accent);font-family:"Zen Maru Gothic",sans-serif;
+  font-weight:700;font-size:21px;display:grid;place-items:center;z-index:1;box-shadow:0 0 0 5px var(--paper)}
+.step.alt .num{border-color:var(--accent-2);color:var(--accent-2)}
+.step.fin .num{border-color:var(--ok);color:var(--ok)}
+.step.ico .num{font-size:23px}
+.step .body{flex:1;min-width:0;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px;margin-top:-2px}
+.step h4{font-family:"Zen Maru Gothic","Noto Sans TC",sans-serif;font-weight:700;font-size:18px;
+  display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.step h4 .where{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--ink-faint);
+  border:1px solid var(--line);padding:2px 8px;border-radius:7px}
+.lines{margin-top:13px;display:flex;flex-direction:column;gap:9px}
+.ln-row{display:flex;gap:11px;align-items:flex-start;font-size:14px}
+.ln-row .who{flex:none;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:12px;
+  padding:3px 9px;border-radius:8px;margin-top:1px;min-width:62px;text-align:center}
+.who.say{background:var(--accent-wash);color:#C56A57}
+.who.do{background:var(--paper-2);color:var(--ink-soft)}
+.who.ai{background:var(--ok-wash);color:var(--ok)}
+.ln-row .txt{color:var(--ink);padding-top:2px}
+.ln-row .txt code{font-family:var(--mono);font-size:12.5px;background:var(--paper-2);
+  padding:1px 6px;border-radius:6px;color:var(--ink)}
+.ln-row .txt .qt{color:#C56A57;font-weight:500}
+.tip{margin-top:13px;font-size:12.8px;color:var(--ink-soft);background:var(--accent-wash);
+  border-radius:11px;padding:9px 13px;display:flex;gap:8px;line-height:1.55}
+.tip b{color:#C56A57}
+
+/* ── file map ── */
+.filemap{background:#3B332B;border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:clamp(20px,2.6vw,28px);overflow-x:auto}
+.filemap pre{font-family:var(--mono);font-size:13px;line-height:2;color:#E6DDCE;white-space:pre}
+.filemap .d{color:#E0A95E}.filemap .f{color:#fff}.filemap .c{color:#9C8E7C}
+.filemap .k{color:#7FC3A6}.filemap .p{color:#E08D80}
+
+/* ── reminder cards ── */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:680px){.cards{grid-template-columns:1fr}}
+.rcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px}
+.rcard .ic{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:21px;
+  background:var(--accent-wash);margin-bottom:13px}
+.rcard:nth-child(2) .ic{background:#FBF1DD}.rcard:nth-child(3) .ic{background:var(--ok-wash)}
+.rcard h4{font-family:"Zen Maru Gothic","Noto Sans TC",sans-serif;font-weight:700;font-size:16px;margin-bottom:6px}
+.rcard p{font-size:13.5px;color:var(--ink-soft)}
+.rcard p code{font-family:var(--mono);font-size:12px;background:var(--paper-2);padding:1px 5px;border-radius:5px;color:var(--ink)}
+
+/* ── roadmap teaser (future) ── */
+.roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+@media(max-width:680px){.roadmap{grid-template-columns:1fr}}
+.rm{display:flex;align-items:center;gap:13px;background:var(--card);border:1px dashed var(--line);
+  border-radius:var(--radius);padding:16px 18px;opacity:.92}
+.rm .rm-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:19px;
+  background:var(--paper-2);flex:none}
+.rm .rm-tx b{font-family:"Zen Maru Gothic","Noto Sans TC",sans-serif;font-weight:700;font-size:15px;display:block}
+.rm .rm-tx span{font-size:12.5px;color:var(--ink-faint)}
+.rm .soon{margin-left:auto;flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);
+  background:var(--accent-wash);padding:3px 9px;border-radius:7px;letter-spacing:.03em}
+
+/* ── footer ── */
+footer{margin-top:clamp(48px,7vw,80px);border-top:1px solid var(--line);padding:30px 0 50px;text-align:center}
+footer .sign{font-size:12px;color:var(--ink-faint)}
+footer .sign a{color:var(--accent);text-decoration:none}
+
+/* ── load animation ── */
+.rise{opacity:0;transform:translateY(16px);animation:rise .7s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ── responsive: collapse rail to top strip ── */
+@media(max-width:900px){
+  .shell{display:block}
+  .rail{position:sticky;top:var(--bar-h);z-index:40;
+    margin:0 calc(-1*clamp(18px,3vw,32px));padding:9px clamp(18px,3vw,32px);
+    background:rgba(244,242,234,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .rail-cap,.rail-note{display:none}
+  .nav{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+  .nav-i{flex:none;padding:7px 11px}
+  .nav-i .nx i,.nav-i .st{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="bar-inner">
+    <span class="logo">iniProj</span>
+    <h1>新案開案手冊</h1>
+    <span class="sub">給新 PM 的入職說明</span>
+  </div>
+</div>
+
+<div class="shell">
+
+  <!-- ░░ MENU / 流程地圖 ░░ -->
+  <aside class="rail">
+    <div class="rail-cap">流程地圖</div>
+    <nav class="nav">
+      <a class="nav-i active" href="#s-open">
+        <span class="dot">1</span>
+        <span class="nx"><b>開新案</b><i>iniRFP 規格初稿</i></span>
+        <span class="st ok">可用</span>
+      </a>
+      <a class="nav-i" href="#s-prd">
+        <span class="dot">2</span>
+        <span class="nx"><b>產 PRD</b><i>R檔 需求文件</i></span>
+        <span class="st ok">可用</span>
+      </a>
+      <a class="nav-i" href="#s-meeting">
+        <span class="dot">3</span>
+        <span class="nx"><b>會議 → PRD</b><i>Meeting 來源</i></span>
+        <span class="st ok">可用</span>
+      </a>
+      <a class="nav-i" href="#s-sa">
+        <span class="dot">4</span>
+        <span class="nx"><b>系統分析</b><i>SA</i></span>
+        <span class="st ok">可用</span>
+      </a>
+      <span class="nav-i lock">
+        <span class="dot">5</span>
+        <span class="nx"><b>系統規格</b><i>SRS</i></span>
+        <span class="st">規劃中</span>
+      </span>
+      <span class="nav-i lock">
+        <span class="dot">6</span>
+        <span class="nx"><b>交接</b><i>Handoff</i></span>
+        <span class="st">規劃中</span>
+      </span>
+    </nav>
+    <div class="rail-note">⌁ 還剩 SRS／交接兩站陸續上線，位子先留著。</div>
+  </aside>
+
+  <!-- ░░ CONTENT ░░ -->
+  <main class="content">
+
+    <header class="hero">
+      <div class="kicker rise" style="animation-delay:.05s">Onboarding · 開一個新案</div>
+      <h2 class="rise" style="animation-delay:.12s">一個新案，<br><span class="wave">從這裡開始</span><span class="star"></span></h2>
+      <p class="lead rise" style="animation-delay:.2s">歡迎加入！這份手冊帶你把一個新案從零開起來——你不用懂程式，也<b>不用自己複製資料夾</b>，跟 Claude <b>講人話</b>，剩下的它會接手。左邊是完整<b>流程地圖</b>；目前能跑通到第四站——<b>開新案</b> → <b>產 PRD</b>（也能從<b>會議記錄</b>來）→ <b>產 SA</b>，剩下 SRS 與交接會陸續接上。</p>
+      <div class="tags rise" style="animation-delay:.28s">
+        <span class="tag">🗂 一句話長出<b>骨架包</b></span>
+        <span class="tag">🌸 問答產出 <b>iniRFP.md</b></span>
+        <span class="tag">📄 一鍵生成 <b>PRD</b></span>
+        <span class="tag">💬 全程<b>講人話</b>操作</span>
+      </div>
+    </header>
+
+    <div class="pipe rise" style="animation-delay:.34s">
+      <div class="pipe-flow">
+        <div class="node">
+          <div class="ic">📥</div><div class="nm">售前文件</div>
+          <div class="ds">RFP／服務建議書／合約</div><code>PM/input/</code>
+        </div>
+        <div class="arrow"><span class="lab">importRFP<br>問答精靈</span><span class="ln"></span></div>
+        <div class="node">
+          <div class="ic">🌸</div><div class="nm">iniRFP.md</div>
+          <div class="ds">規格初稿（可能不完整）</div><code>PM/output/</code>
+        </div>
+        <div class="arrow"><span class="lab">iniRFPtoPRD</span><span class="ln"></span></div>
+        <div class="node">
+          <div class="ic">📄</div><div class="nm">PRD 需求檔</div>
+          <div class="ds">R檔＋索引＋追溯表</div><code>PRD/</code>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP GROUP 1: 開新案 -->
+    <section class="sec" id="s-open">
+      <div class="sec-head">
+        <div class="kicker">Step by step</div>
+        <h3>開新案 · 產出規格初稿</h3>
+        <p>照順序做就好。左邊是「你做什麼／你說什麼」，Claude 會接著做事——你只負責決策，不負責動工。</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <div class="body">
+            <h4>安裝 plugin <span class="where">每人一次</span></h4>
+            <div class="lines">
+              <div class="ln-row"><span class="who do">你做</span><span class="txt">在 Claude Code 輸入 <code>/plugin marketplace add shellsirius/iniProj-plugin</code> → <code>/plugin install iniproj</code> → <code>/exit</code> 重開生效。</span></div>
+              <div class="ln-row"><span class="who do">為什麼</span><span class="txt">裝好後，「開新專案」這句話在<b>任何資料夾</b>都能用——這是整套流程的入口。只需做這一次。</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">2</div>
+          <div class="body">
+            <h4>說「開新專案」，長出一整包 <span class="where">開新專案 skill</span></h4>
+            <div class="lines">
+              <div class="ln-row"><span class="who say">你說</span><span class="txt"><span class="qt">「開新專案」</span>。</span></div>
+              <div class="ln-row"><span class="who ai">Claude</span><span class="txt">問你<b>目標路徑</b>與<b>專案名</b>（例 <code>proj-某某案</code>）→ 把整包範本複製過去。骨架包裡已備好所有規則與工具。</span></div>
+            </div>
+            <div class="tip">🪄 <span><b>你不用自己複製資料夾了。</b>一句話，Claude 幫你在指定位置長一包乾淨的新案。</span></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">3</div>
+          <div class="body">
+            <h4>站進新案資料夾，再啟動 Claude <span class="where">終端機</span></h4>
+            <div class="lines">
+              <div class="ln-row"><span class="who do">你做</span><span class="txt">終端機 <code>cd</code> 進剛生出的新案資料夾 → 輸入 <code>claude</code> 啟動（或 VS Code 開該資料夾）。</span></div>
+            </div>
+            <div class="tip">🚪 <span><b>先走進房間，再請人進來。</b>分析 RFP、產 PRD／SA 的 skill 綁在新案資料夾裡，Claude 得「站進去」才讀得到。</span></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">4</div>
+          <div class="body">
+            <h4>放入售前文件 <span class="where">PM/input/</span></h4>
+            <div class="lines">
+              <div class="ln-row"><span class="who do">你做</span><span class="txt">把 RFP／服務建議書／合約丟進 <code>PM/input/</code>。</span></div>
+              <div class="ln-row"><span class="who do">格式</span><span class="txt"><code>.docx</code> <code>.pdf</code> <code>.txt</code> <code>.md</code> 都行，可一次放多份。</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">5</div>
+          <div class="body">
+            <h4>跟它說「importRFP」 <span class="where">importRFP skill</span></h4>
+            <div class="lines">
+              <div class="ln-row"><span class="who say">你說</span><span class="txt"><span class="qt">「importRFP」</span>（或「分析這份 RFP」）。</span></div>
+              <div class="ln-row"><span class="who ai">Claude</span><span class="txt">讀文件 → 產 <code>gap-analysis.md</code>（哪些合約已綁定、哪些待你決策，附出處）→ 產 <code>prefill.js</code> → <b>自動開啟新手包問答網頁</b>。</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">6</div>
+          <div class="body">
+            <h4>補完問卷，收回產出 <span class="where">PM/output/iniRFP.md</span></h4>
+            <div class="lines">
+              <div class="ln-row"><span class="who do">你做</span><span class="txt">網頁裡「合約已綁定」的題目已自動帶出並標 📎；補完「待決策」題目 → 按<b>下載 .md</b>。</span></div>
+              <div class="ln-row"><span class="who say">你說</span><span class="txt"><span class="qt">「填好了」</span>。</span></div>
+              <div class="ln-row"><span class="who ai">Claude</span><span class="txt">把下載的 .md 搬成 <code>PM/output/iniRFP.md</code>——這份是 <b>RFP 規格初稿</b>，可能還不完整，後面的文件都以它為依據。</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP GROUP 2: 產 PRD -->
+    <section class="sec" id="s-prd">
+      <div class="sec-head">
+        <div class="kicker">Generate</div>
+        <h3>產 PRD · 生成需求文件</h3>
+        <p>規格初稿到位後，一句話讓 Claude 把它變成結構化的需求檔。</p>
+      </div>
+
+      <div class="steps">
+        <div class="step fin">
+          <div class="num">7</div>
+          <div class="body">
+            <h4>跟它說「產PRD」 <span class="where">iniRFPtoPRD skill</span></h4>
+            <div class="lines">
+              <div class="ln-row"><span class="who say">你說</span><span class="txt"><span class="qt">「產PRD」</span>（或 <code>iniRFPtoPRD</code>）。</span></div>
+              <div class="ln-row"><span class="who ai">Claude</span><span class="txt">讀 <code>iniRFP.md</code> → 依規範產出 PRD <code>R檔</code> → 更新階段索引 <code>PRD.md</code> → 生成追溯總表 <code>traceability.md</code>。動工前它會先列「要產哪幾筆需求」給你確認。</span></div>
+            </div>
+            <div class="tip">📝 <span><b>PRD 也能從會議記錄來</b>——見下一站「會議記錄 → PRD」。</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATION 3: 會議 → PRD -->
+    <section class="sec" id="s-meeting">
+      <div class="sec-head">
+        <div class="kicker">Another source</div>
+        <h3>會議記錄 → PRD</h3>
+        <p>PRD 不一定要從問卷來——需求訪談、客戶會議的記錄，也能直接變成需求檔。</p>
+      </div>
+      <div class="steps">
+        <div class="step ico alt">
+          <div class="num">📝</div>
+          <div class="body">
+            <h4>跟它說「會議產PRD」 <span class="where">MeetingtoPRD skill</span></h4>
+            <div class="lines">
+              <div class="ln-row"><span class="who do">你做</span><span class="txt">把會議／訪談逐字稿放進 <code>PM/Meeting/</code>。</span></div>
+              <div class="ln-row"><span class="who say">你說</span><span class="txt"><span class="qt">「會議產PRD」</span>，或指定檔案 <code>MeetingtoPRD PM/Meeting/某次會議.md</code>。</span></div>
+              <div class="ln-row"><span class="who ai">Claude</span><span class="txt">萃取需求（<b>附逐字稿佐證</b>讓你核對）→ 判定是<b>新增</b>還是<b>修訂既有需求</b> → 先列清單給你確認 → 寫入 PRD。</span></div>
+            </div>
+            <div class="tip">💡 <span>一次處理一份會議。來源可能是<b>需求訪談紀錄</b>（多半<b>新增需求</b>），也可能是<b>後續會議</b>（<b>修訂既有需求</b>）——Claude 會逐項判定、先列清單給你確認。</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATION 4: 產 SA -->
+    <section class="sec" id="s-sa">
+      <div class="sec-head">
+        <div class="kicker">Next layer</div>
+        <h3>產 SA · 把需求拆成功能</h3>
+        <p>需求定了，下一層是「怎麼拆」——SA 把每條需求拆成功能與模組，之後 SRS 再逐功能寫頁面規格。</p>
+      </div>
+      <div class="steps">
+        <div class="step ico fin">
+          <div class="num">🧭</div>
+          <div class="body">
+            <h4>跟它說「產SA」 <span class="where">PRDtoSA skill</span></h4>
+            <div class="lines">
+              <div class="ln-row"><span class="who say">你說</span><span class="txt"><span class="qt">「產SA」</span>（或 <code>PRDtoSA</code>）。</span></div>
+              <div class="ln-row"><span class="who ai">Claude</span><span class="txt">讀 PRD <code>R檔</code> → 把需求拆成<b>功能</b>、配編號（如 <code>BO-1-2</code>）、定模組 → 先列<b>功能／模組規劃</b>給你確認 → 寫模組 SA、登錄 <code>SA.md</code>、回填追溯表。</span></div>
+            </div>
+            <div class="tip">🧭 <span>SA 只談「<b>怎麼拆、誰依賴誰</b>」，不碰頁面長相——那是之後的 SRS。</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILE MAP -->
+    <section class="sec">
+      <div class="sec-head">
+        <div class="kicker">Where things land</div>
+        <h3>東西都跑去哪了</h3>
+        <p>跑完一輪，新案資料夾長這樣。你丟進去的、Claude 產出來的，一眼對照。</p>
+      </div>
+      <div class="filemap rise">
+<pre><span class="d">proj-某某案/</span>
+├─ <span class="d">PM/</span>
+│   ├─ <span class="d">input/</span>          <span class="c"># ← 你丟售前文件（RFP／合約）</span>
+│   ├─ <span class="d">Meeting/</span>        <span class="c"># ← 會議／訪談記錄（PRD 的另一種來源）</span>
+│   ├─ <span class="d">output/</span><span class="p">iniRFP.md</span>  <span class="c"># ← 問答產出的規格初稿</span>
+│   └─ <span class="f">index.html</span>      <span class="c"># 新手包問答精靈</span>
+├─ <span class="d">PRD/</span>
+│   ├─ <span class="f">R0001.md</span> …     <span class="c"># 一筆需求一個檔</span>
+│   ├─ <span class="f">PRD.md</span>          <span class="c"># 階段索引</span>
+│   ├─ <span class="f">traceability.md</span> <span class="c"># 追溯總表（自動生成）</span>
+│   └─ <span class="k">rules/</span>          <span class="c"># PRD 撰寫規範</span>
+└─ <span class="d">SA/</span>
+    ├─ <span class="f">SA.md</span>           <span class="c"># 功能架構索引（需求拆成功能）</span>
+    ├─ <span class="d">{系統}/</span>…        <span class="c"># 模組層功能分析</span>
+    └─ <span class="k">rules/</span>          <span class="c"># SA 撰寫規範</span></pre>
+      </div>
+    </section>
+
+    <!-- REMINDERS -->
+    <section class="sec">
+      <div class="sec-head">
+        <div class="kicker">Keep in mind</div>
+        <h3>三個小提醒</h3>
+        <p>新手最常踩的三件事，先記著就不會卡。</p>
+      </div>
+      <div class="cards">
+        <div class="rcard rise">
+          <div class="ic">🚪</div>
+          <h4>站對資料夾</h4>
+          <p><code>開新專案</code> 在哪都能用；但 <code>importRFP</code> 等要先 <code>cd</code> 進新案、最後才 <code>claude</code>。沒觸發多半是站錯地方——<code>/exit</code> 重來即可。</p>
+        </div>
+        <div class="rcard rise" style="animation-delay:.08s">
+          <div class="ic">🤔</div>
+          <h4>不確定就不硬填</h4>
+          <p>合約沒寫死的，標「待確認」；Claude 也<b>不會腦補</b>，模糊的它會問你，而不是自己編。</p>
+        </div>
+        <div class="rcard rise" style="animation-delay:.16s">
+          <div class="ic">🔒</div>
+          <h4>版控要你開口</h4>
+          <p><code>git</code> 的 commit／push <b>只有你明說才做</b>。平常 Claude 只改檔＋給你看，不會自己上傳。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP / 之後會補的 -->
+    <section class="sec">
+      <div class="sec-head">
+        <div class="kicker">Coming next</div>
+        <h3>之後會補上的站</h3>
+        <p>選單最後兩站的位子先留著，這些會逐步擴充進這份手冊。</p>
+      </div>
+      <div class="roadmap">
+        <div class="rm">
+          <div class="rm-ic">📐</div>
+          <div class="rm-tx"><b>系統規格 SRS</b><span>頁面、欄位、元件、UI Flow</span></div>
+          <span class="soon">規劃中</span>
+        </div>
+        <div class="rm">
+          <div class="rm-ic">🤝</div>
+          <div class="rm-tx"><b>交接 Handoff</b><span>交付給開發團隊的收尾</span></div>
+          <span class="soon">規劃中</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="sign">iniProj 開案範本包 · 設計沿用 <a href="https://shellsirius.github.io/project-starter-kit/" target="_blank" rel="noopener">專案起始新手包</a> · 雪綸 Sharon</div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+// 選單 scroll-spy：在可用的兩站之間切換高亮
+(function(){
+  var links = {};
+  document.querySelectorAll('.nav-i[href^="#"]').forEach(function(a){
+    links[a.getAttribute('href').slice(1)] = a;
+  });
+  var targets = document.querySelectorAll('#s-open,#s-prd,#s-meeting,#s-sa');
+  if(!('IntersectionObserver' in window) || !targets.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        Object.keys(links).forEach(function(id){
+          links[id].classList.toggle('active', id === e.target.id);
+        });
+      }
+    });
+  }, {rootMargin:'-42% 0px -52% 0px', threshold:0});
+  targets.forEach(function(t){ io.observe(t); });
+})();
+</script>
+
+</body>
+</html>

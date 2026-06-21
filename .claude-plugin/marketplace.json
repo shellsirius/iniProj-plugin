@@ -1,0 +1,17 @@
+{
+  "name": "iniproj",
+  "owner": {
+    "name": "Sharon",
+    "email": "ewill.software@gmail.com"
+  },
+  "metadata": {
+    "description": "PM 開新案範本包：說「開新專案」即在指定路徑長出一整包專案起始骨架（PM/PRD/SA/SRS 流程＋skills）。"
+  },
+  "plugins": [
+    {
+      "name": "iniproj",
+      "source": "./plugins/iniproj",
+      "description": "開新專案啟動器：把專案起始範本包複製到你指定的路徑，並接續 iniRFP→PRD→SA 流程。"
+    }
+  ]
+}
