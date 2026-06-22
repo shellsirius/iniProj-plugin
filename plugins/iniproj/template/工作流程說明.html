@@ -43,6 +43,10 @@ body{
   font-size:clamp(14px,1.7vw,17px)}
 .topbar .sub{color:var(--ink-soft);font-size:12.5px;margin-left:auto}
 @media(max-width:560px){.topbar .sub{display:none}}
+.barlink{margin-left:14px;font-size:12.5px;font-family:var(--mono);text-decoration:none;
+  color:var(--accent);border:1px solid var(--line);padding:5px 11px;border-radius:9px;
+  background:var(--card);white-space:nowrap;transition:.16s}
+.barlink:hover{background:var(--accent-wash);border-color:var(--accent)}
 
 /* ── layout shell: rail + content ── */
 .shell{max-width:1180px;margin:0 auto;padding:0 clamp(18px,3vw,32px);
@@ -175,6 +179,37 @@ a.nav-i:hover{background:var(--paper-2);border-color:var(--line)}
 .rcard p{font-size:13.5px;color:var(--ink-soft)}
 .rcard p code{font-family:var(--mono);font-size:12px;background:var(--paper-2);padding:1px 5px;border-radius:5px;color:var(--ink)}
 
+/* ── skill cheat-sheet (merged) ── */
+.ltbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.ltbl th,.ltbl td{text-align:left;padding:13px 16px;font-size:13.5px;vertical-align:top;border-bottom:1px solid var(--line)}
+.ltbl tr:last-child td{border-bottom:none}
+.ltbl th{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13px;background:var(--paper-2);color:var(--ink)}
+.ltbl td b{color:var(--accent)}
+.ltbl .lyr{font-family:var(--mono);font-weight:500;color:var(--ink)}
+.scards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
+@media(max-width:720px){.scards{grid-template-columns:1fr}}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;position:relative}
+.scard .top{display:flex;align-items:center;gap:11px;margin-bottom:13px}
+.scard .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:var(--accent-wash);flex:none}
+.scard:nth-child(4n+2) .ic{background:#FBF1DD}.scard:nth-child(4n+3) .ic{background:var(--ok-wash)}.scard:nth-child(4n) .ic{background:#EAE6F2}
+.scard h4{font-family:"Zen Maru Gothic","Noto Sans TC",sans-serif;font-weight:700;font-size:16.5px}
+.scard .trig{font-family:var(--mono);font-size:11px;color:var(--ok);background:var(--ok-wash);padding:1px 7px;border-radius:6px;margin-top:2px;display:inline-block}
+.scard .io{display:flex;flex-direction:column;gap:7px;margin-top:4px}
+.io-row{display:flex;gap:9px;font-size:13px;align-items:flex-start}
+.io-row .tg{flex:none;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11px;
+  padding:2px 8px;border-radius:7px;margin-top:1px;min-width:42px;text-align:center}
+.io-row .tg.r{background:var(--paper-2);color:var(--ink-soft)}
+.io-row .tg.p{background:var(--accent-wash);color:#C56A57}
+.io-row .tg.k{background:var(--ok-wash);color:var(--ok)}
+.io-row .tx{color:var(--ink)}
+.io-row code{font-family:var(--mono);font-size:12px;background:var(--paper-2);padding:1px 6px;border-radius:5px;color:var(--ink)}
+.scard .num{position:absolute;top:16px;right:18px;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:30px;color:var(--paper-2)}
+.scard.global{border-color:var(--accent);border-width:1.5px}
+.scard .badge{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;color:#fff;background:var(--accent);
+  padding:2px 8px;border-radius:6px;margin-left:auto}
+
 /* ── roadmap teaser (future) ── */
 .roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
 @media(max-width:680px){.roadmap{grid-template-columns:1fr}}
@@ -245,18 +280,23 @@ footer .sign a{color:var(--accent);text-decoration:none}
         <span class="nx"><b>系統分析</b><i>SA</i></span>
         <span class="st ok">可用</span>
       </a>
-      <span class="nav-i lock">
+      <a class="nav-i" href="#s-srs">
         <span class="dot">5</span>
-        <span class="nx"><b>系統規格</b><i>SRS</i></span>
-        <span class="st">規劃中</span>
-      </span>
+        <span class="nx"><b>系統規格</b><i>SRS 頁面規格</i></span>
+        <span class="st ok">可用</span>
+      </a>
       <span class="nav-i lock">
         <span class="dot">6</span>
         <span class="nx"><b>交接</b><i>Handoff</i></span>
         <span class="st">規劃中</span>
       </span>
+      <a class="nav-i" href="#s-skills">
+        <span class="dot">✦</span>
+        <span class="nx"><b>skill 速查</b><i>全部 skill 一覽</i></span>
+        <span class="st ok">總覽</span>
+      </a>
     </nav>
-    <div class="rail-note">⌁ 還剩 SRS／交接兩站陸續上線，位子先留著。</div>
+    <div class="rail-note">⌁ 還剩交接一站陸續上線，位子先留著。</div>
   </aside>
 
   <!-- ░░ CONTENT ░░ -->
@@ -265,7 +305,7 @@ footer .sign a{color:var(--accent);text-decoration:none}
     <header class="hero">
       <div class="kicker rise" style="animation-delay:.05s">Onboarding · 開一個新案</div>
       <h2 class="rise" style="animation-delay:.12s">一個新案，<br><span class="wave">從這裡開始</span><span class="star"></span></h2>
-      <p class="lead rise" style="animation-delay:.2s">歡迎加入！這份手冊帶你把一個新案從零開起來——你不用懂程式，也<b>不用自己複製資料夾</b>，跟 Claude <b>講人話</b>，剩下的它會接手。左邊是完整<b>流程地圖</b>；目前能跑通到第四站——<b>開新案</b> → <b>產 PRD</b>（也能從<b>會議記錄</b>來）→ <b>產 SA</b>，剩下 SRS 與交接會陸續接上。</p>
+      <p class="lead rise" style="animation-delay:.2s">歡迎加入！這份手冊帶你把一個新案從零開起來——你不用懂程式，也<b>不用自己複製資料夾</b>，跟 Claude <b>講人話</b>，剩下的它會接手。左邊是完整<b>流程地圖</b>；目前能跑通到第五站——<b>開新案</b> → <b>產 PRD</b>（也能從<b>會議記錄</b>來）→ <b>產 SA</b> → <b>產 SRS</b>，剩下交接會陸續接上。</p>
       <div class="tags rise" style="animation-delay:.28s">
         <span class="tag">🗂 一句話長出<b>骨架包</b></span>
         <span class="tag">🌸 問答產出 <b>iniRFP.md</b></span>
@@ -440,6 +480,103 @@ footer .sign a{color:var(--accent);text-decoration:none}
       </div>
     </section>
 
+    <!-- STATION 5: 產 SRS -->
+    <section class="sec" id="s-srs">
+      <div class="sec-head">
+        <div class="kicker">Page spec</div>
+        <h3>產 SRS · 把功能寫成頁面規格</h3>
+        <p>功能拆好了，最後一層是「畫面長怎樣」——SRS 逐功能寫頁面規格：欄位、元件、驗證、頁內流轉。</p>
+      </div>
+      <div class="steps">
+        <div class="step ico fin">
+          <div class="num">📐</div>
+          <div class="body">
+            <h4>跟它說「產SRS」 <span class="where">SAtoSRS skill</span></h4>
+            <div class="lines">
+              <div class="ln-row"><span class="who say">你說</span><span class="txt"><span class="qt">「產SRS」</span>（或 <code>SAtoSRS</code>）。</span></div>
+              <div class="ln-row"><span class="who ai">Claude</span><span class="txt">讀 SA 功能清單 → 首批先建<b>功能地圖</b>（導覽樹）與<b>全域-UI</b> → 先列<b>頁面清單</b>給你確認 → 逐功能產頁面規格（沿用功能編號當頁碼，如 <code>FB-1-1</code>）、回填追溯表。</span></div>
+            </div>
+            <div class="tip">📐 <span>頁面代碼<b>沿用 SA 功能編號</b>、欄位依<b>查詢／表單／列表</b>三種表頭；跨功能相依只<b>一行引用 SA</b>，不重寫。</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILL CHEAT-SHEET (merged) -->
+    <section class="sec" id="s-skills">
+      <div class="sec-head">
+        <div class="kicker">Cheat sheet</div>
+        <h3>skill 速查 · 三層文件模型</h3>
+        <p>一次看全：同一個需求往下走三層，每層只回答自己的問題；下面把每顆 skill 的觸發詞、讀什麼、產什麼、重點列清楚。</p>
+      </div>
+
+      <table class="ltbl rise">
+        <thead><tr><th style="width:78px">層</th><th style="width:160px">回答的問題</th><th>寫什麼</th><th>不寫什麼</th></tr></thead>
+        <tbody>
+          <tr><td class="lyr">PRD</td><td><b>要什麼／為什麼</b></td><td>需求目的、角色情境、業務規則、驗收條件</td><td>功能分解、相依、頁面 spec</td></tr>
+          <tr><td class="lyr">SA</td><td><b>怎麼拆／怎麼相依</b></td><td>流程線、功能清單、跨功能相依、資料</td><td>業務動機、頁面欄位／元件</td></tr>
+          <tr><td class="lyr">SRS</td><td><b>畫面長怎樣</b></td><td>頁面、欄位、元件、驗證、頁內 UI flow</td><td>跨功能相依、業務動機</td></tr>
+        </tbody>
+      </table>
+
+      <div class="scards">
+        <div class="scard global">
+          <span class="num">0</span>
+          <div class="top"><span class="ic">🗂</span><div><h4>開新專案</h4><span class="trig">說「開新專案」</span></div><span class="badge">全域入口</span></div>
+          <div class="io">
+            <div class="io-row"><span class="tg r">讀</span><span class="tx">範本包（plugin 內）</span></div>
+            <div class="io-row"><span class="tg k">產</span><span class="tx">在你指定路徑長出整包骨架，並把售前文件搬進 <code>PM/input/</code></span></div>
+            <div class="io-row"><span class="tg p">重點</span><span class="tx">裝了 plugin 後<b>任何資料夾</b>都能用；只做一次</span></div>
+          </div>
+        </div>
+        <div class="scard">
+          <span class="num">1</span>
+          <div class="top"><span class="ic">🔍</span><div><h4>importRFP</h4><span class="trig">說「importRFP」</span></div></div>
+          <div class="io">
+            <div class="io-row"><span class="tg r">讀</span><span class="tx"><code>PM/input/</code> 售前文件</span></div>
+            <div class="io-row"><span class="tg k">產</span><span class="tx"><code>gap-analysis.md</code>＋<code>prefill.js</code>，並開啟問答網頁</span></div>
+            <div class="io-row"><span class="tg p">重點</span><span class="tx">只填合約綁定項、附出處；其餘標待決策</span></div>
+          </div>
+        </div>
+        <div class="scard">
+          <span class="num">2</span>
+          <div class="top"><span class="ic">📄</span><div><h4>iniRFPtoPRD</h4><span class="trig">說「產PRD」</span></div></div>
+          <div class="io">
+            <div class="io-row"><span class="tg r">讀</span><span class="tx"><code>PM/output/iniRFP.md</code></span></div>
+            <div class="io-row"><span class="tg k">產</span><span class="tx">PRD <code>R檔</code>＋<code>PRD.md</code> 索引＋<code>traceability.md</code></span></div>
+            <div class="io-row"><span class="tg p">重點</span><span class="tx">只寫 what／why；動工前先列 R 清單確認</span></div>
+          </div>
+        </div>
+        <div class="scard">
+          <span class="num">3</span>
+          <div class="top"><span class="ic">📝</span><div><h4>MeetingtoPRD</h4><span class="trig">說「會議產PRD」</span></div></div>
+          <div class="io">
+            <div class="io-row"><span class="tg r">讀</span><span class="tx"><code>PM/Meeting/</code> 會議／訪談逐字稿</span></div>
+            <div class="io-row"><span class="tg k">產</span><span class="tx">新增或修訂 PRD <code>R檔</code></span></div>
+            <div class="io-row"><span class="tg p">重點</span><span class="tx">附逐字稿佐證、逐項判定新增／修訂、先列清單</span></div>
+          </div>
+        </div>
+        <div class="scard">
+          <span class="num">4</span>
+          <div class="top"><span class="ic">🧭</span><div><h4>PRDtoSA</h4><span class="trig">說「產SA」</span></div></div>
+          <div class="io">
+            <div class="io-row"><span class="tg r">讀</span><span class="tx">PRD <code>R檔</code></span></div>
+            <div class="io-row"><span class="tg k">產</span><span class="tx"><code>SA/flows/</code> 流程線＋模組 SA＋<code>SA.md</code>，回填追溯</span></div>
+            <div class="io-row"><span class="tg p">重點</span><span class="tx">流程先行、三型分類、兩道閘；<b>待釐清先請你確認</b>才產</span></div>
+          </div>
+        </div>
+        <div class="scard">
+          <span class="num">5</span>
+          <div class="top"><span class="ic">📐</span><div><h4>SAtoSRS</h4><span class="trig">說「產SRS」</span></div></div>
+          <div class="io">
+            <div class="io-row"><span class="tg r">讀</span><span class="tx">SA 功能清單（<code>SA.md</code>、模組 SA、流程線）</span></div>
+            <div class="io-row"><span class="tg k">產</span><span class="tx">逐功能頁面規格＋<code>功能地圖</code>＋<code>全域-UI</code>，回填追溯</span></div>
+            <div class="io-row"><span class="tg p">重點</span><span class="tx">頁碼沿用 SA 功能編號、欄位三表頭；<b>待釐清先確認</b></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FILE MAP -->
     <section class="sec">
       <div class="sec-head">
@@ -459,10 +596,16 @@ footer .sign a{color:var(--accent);text-decoration:none}
 │   ├─ <span class="f">PRD.md</span>          <span class="c"># 階段索引</span>
 │   ├─ <span class="f">traceability.md</span> <span class="c"># 追溯總表（自動生成）</span>
 │   └─ <span class="k">rules/</span>          <span class="c"># PRD 撰寫規範</span>
-└─ <span class="d">SA/</span>
-    ├─ <span class="f">SA.md</span>           <span class="c"># 功能架構索引（需求拆成功能）</span>
-    ├─ <span class="d">{系統}/</span>…        <span class="c"># 模組層功能分析</span>
-    └─ <span class="k">rules/</span>          <span class="c"># SA 撰寫規範</span></pre>
+├─ <span class="d">SA/</span>
+│   ├─ <span class="f">SA.md</span>           <span class="c"># 功能架構索引（需求拆成功能）</span>
+│   ├─ <span class="d">flows/</span>          <span class="c"># 業務流程線</span>
+│   ├─ <span class="d">{系統}/</span>…        <span class="c"># 模組層功能分析</span>
+│   └─ <span class="k">rules/</span>          <span class="c"># SA 撰寫規範</span>
+└─ <span class="d">SRS/</span>
+    ├─ <span class="f">功能地圖.md</span>      <span class="c"># 導覽樹＋breadcrumb 權威</span>
+    ├─ <span class="f">全域-UI.md</span>       <span class="c"># topbar／選單等全站共用</span>
+    ├─ <span class="d">{系統}/{模組}/</span>… <span class="c"># 逐功能頁面規格</span>
+    └─ <span class="k">rules/</span>          <span class="c"># SRS 規範＋元件庫</span></pre>
       </div>
     </section>
 
@@ -482,7 +625,7 @@ footer .sign a{color:var(--accent);text-decoration:none}
         <div class="rcard rise" style="animation-delay:.08s">
           <div class="ic">🤔</div>
           <h4>不確定就不硬填</h4>
-          <p>合約沒寫死的，標「待確認」；Claude 也<b>不會腦補</b>，模糊的它會問你，而不是自己編。</p>
+          <p>合約沒寫死的，標「待確認」；Claude 也<b>不會腦補</b>，模糊的它會問你，而不是自己編。需求有<b>待釐清</b>時，產 SA／SRS 前它會<b>先請你確認</b>（除非你說先做）。</p>
         </div>
         <div class="rcard rise" style="animation-delay:.16s">
           <div class="ic">🔒</div>
@@ -497,12 +640,12 @@ footer .sign a{color:var(--accent);text-decoration:none}
       <div class="sec-head">
         <div class="kicker">Coming next</div>
         <h3>之後會補上的站</h3>
-        <p>選單最後兩站的位子先留著，這些會逐步擴充進這份手冊。</p>
+        <p>這些能力會逐步擴充進這份手冊。</p>
       </div>
       <div class="roadmap">
         <div class="rm">
-          <div class="rm-ic">📐</div>
-          <div class="rm-tx"><b>系統規格 SRS</b><span>頁面、欄位、元件、UI Flow</span></div>
+          <div class="rm-ic">🧪</div>
+          <div class="rm-tx"><b>測試 Testing</b><span>測試案例與驗收</span></div>
           <span class="soon">規劃中</span>
         </div>
         <div class="rm">
@@ -527,7 +670,7 @@ footer .sign a{color:var(--accent);text-decoration:none}
   document.querySelectorAll('.nav-i[href^="#"]').forEach(function(a){
     links[a.getAttribute('href').slice(1)] = a;
   });
-  var targets = document.querySelectorAll('#s-open,#s-prd,#s-meeting,#s-sa');
+  var targets = document.querySelectorAll('#s-open,#s-prd,#s-meeting,#s-sa,#s-srs,#s-skills');
   if(!('IntersectionObserver' in window) || !targets.length) return;
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
