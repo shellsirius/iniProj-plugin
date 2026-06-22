@@ -18,7 +18,7 @@
    - 來源是會議／訪談記錄 → 跟我說「會議產PRD」（或 `MeetingtoPRD`），讀 `PM/Meeting/` 指定檔，萃取需求、可新增或修訂既有 R檔（動工前先列清單確認）。
 6. 產 SA：跟我說「產SA」（或 `PRDtoSA`），讀 PRD R檔，依 `SA/rules/SA撰寫規範.md` 把需求拆成功能、寫模組層 SA、登錄 `SA/SA.md`、回填 `PRD/traceability.md` 的「SA 對應」欄（動工前先列功能／模組規劃確認）。
 7. 產 SRS：跟我說「產SRS」（或 `SAtoSRS`），讀 SA 功能清單，依 `SRS/rules/SRS撰寫規範.md` 為每個功能產出一頁頁面規格（頁碼沿用功能編號、含頁標題／欄位／頁內 UI flow；breadcrumb 由 `SRS/功能地圖.md` 統一定義）、回填 `PRD/traceability.md` 的「SRS 對應」欄（動工前先列頁面清單確認）。
-8. 產測試：跟我說「產測試」（或 `SRStoTest`），讀 SRS 頁面＋PRD 驗收條件，依 `Testing/test-cases/rules/測試案例撰寫規範.md` 產測試案例（TC 全域流水）、回填 `PRD/traceability.md` 的「測試對應」欄（動工前先列 TC 規劃確認；缺陷追蹤見 `Testing/缺陷追蹤/`）。
+8. 產測試：跟我說「產測試」（或 `SRStoTest`，可指定 R 如「為 R0001 產測試」），讀**指定 R檔**、依追溯找出相關 SA／SRS，依 `Testing/test-cases/rules/測試案例撰寫規範.md` 產測試案例（一 R 一檔、TC 全域流水）、回填 `PRD/traceability.md` 的「測試對應」欄（動工前先列 TC 規劃確認）。缺陷 Issue 為測試執行後的**獨立流程**，見 `Testing/缺陷追蹤/`，與產測試分開。
 
 ## 資料夾結構
 
