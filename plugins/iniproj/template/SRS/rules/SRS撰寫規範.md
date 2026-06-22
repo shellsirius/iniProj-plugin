@@ -23,7 +23,7 @@
 - **一個 SA 功能 ＝ 一個 SRS 頁面**。
 - **頁面代碼直接沿用 SA 功能編號**（如 `FB-1-1`），全域唯一、不回收、與 SA 同步。
 - 檔案路徑：`SRS/{系統}/{模組}/{功能}.md`，例 `SRS/FB/FB-1/FB-1-1.md`。
-- 一個 SA 功能若畫面確需拆成多子頁，子頁用 `FB-1-1a`／`FB-1-1b`，並於 SA 回註；**不另開功能編號**。
+- 一個 SA 功能若畫面過大需拆成多子頁，**沿用同一功能編號**、不另開編號（拆檔門檻與子頁命名詳 [rules/srs_file_split_guide.md](srs_file_split_guide.md)）。
 
 ---
 
@@ -35,7 +35,7 @@
 2. **頁標題**：本頁主標題 H1（**逐頁寫**）。
 3. **進入點／前置條件**：誰能進、從哪進、需何權限／狀態。
 4. **頁面區塊與欄位**：依該頁實際需要列出區塊（查詢條件／列表／表單／動作按鈕…）；**每區塊附對應欄位規格表**，表頭依用途三選一（見 §3.1）。無內容的區塊整段刪除。
-5. **頁內 UI flow**：單功能內頁面流轉（列表→詳細、開 dialog、分頁切換）。
+5. **頁內 UI flow**：單功能內區塊／Dialog／子頁的流轉（列表→詳細、開 dialog、分頁切換），條列＋Mermaid；撰寫與畫法詳 [rules/srs_ui_flow_guide.md](srs_ui_flow_guide.md)。跨功能流轉屬 SA 流程線、不寫於此。
 6. **跨功能相依**：**一行引用 SA §2**，不重寫（見 §五）。
 7. **狀態與訊息**：成功／錯誤／空資料等提示。
 8. **設計備註**：只寫**本頁專屬**（見 §五）。
@@ -107,3 +107,16 @@
 - **元件**一律用 `srs_component_rules.md` 詞庫，不綁特定 UI 框架。
 - **不寫**：跨功能相依（SA）、業務動機（PRD）。
 - **不腦補**：PRD／SA 未明確的欄位、驗證、流轉，標「待釐清」或回頭問。
+
+---
+
+## 七、相關規則檔（`SRS/rules/`）
+
+| 檔案 | 管什麼 |
+|---|---|
+| [srs_component_rules.md](srs_component_rules.md) | 元件詞庫、驗證固定措辭、資料來源四分法、遮罩 |
+| [srs_common_rules.md](srs_common_rules.md) | 跨頁共用行為（表單送出／列表／Toast／按鈕／權限／Session／多語系）；頁面以 § 引用不重寫 |
+| [srs_ui_flow_guide.md](srs_ui_flow_guide.md) | 頁內 UI Flow 撰寫與 Mermaid 畫法 |
+| [srs_file_split_guide.md](srs_file_split_guide.md) | 資料夾分層、單頁過大時的子頁拆分與命名 |
+
+> 導覽結構／breadcrumb 屬 [功能地圖.md](../功能地圖.md)；全站共用 UI chrome 屬 [全域-UI.md](../全域-UI.md)（產 SRS 首批建立）。

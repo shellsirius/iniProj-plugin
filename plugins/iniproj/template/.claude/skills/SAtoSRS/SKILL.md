@@ -8,7 +8,7 @@ description: 讀取 SA 功能清單（SA/SA.md 功能架構索引、各模組 SA
 把 SA 的「功能架構」轉成 SRS 的「頁面規格」。一個 SA 功能 ＝ 一個 SRS 頁面，頁面代碼沿用功能編號。
 
 ## 第 0 步：先讀規範
-讀 `SRS/rules/SRS撰寫規範.md`（並順帶看 `SA/rules/SA撰寫規範.md` 了解功能編號／流程線）。鐵則：
+讀 `SRS/rules/SRS撰寫規範.md`（並順帶看 `SA/rules/SA撰寫規範.md` 了解功能編號／流程線）。規範 §七 另指向子規則檔：`srs_common_rules`（共用行為）／`srs_ui_flow_guide`（頁內流轉）／`srs_file_split_guide`（拆檔）／`srs_component_rules`（元件），撰寫時一併參照。鐵則：
 - **頁面＝SA 功能**，頁面代碼沿用功能編號，路徑 `SRS/{系統}/{模組}/{功能}.md`。
 - SRS 只寫**畫面**：頁面、breadcrumb、頁標題、欄位、元件、驗證、**頁內** UI flow。
 - **跨功能／跨模組相依**只一行引用 SA §2，**不重寫**；流程細節看 `SA/flows/`，不重寫。
