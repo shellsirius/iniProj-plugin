@@ -17,6 +17,7 @@
    - 來源是 iniRFP → 跟我說「產PRD」（或 `iniRFPtoPRD`），讀 `PM/output/iniRFP.md`。
    - 來源是會議／訪談記錄 → 跟我說「會議產PRD」（或 `MeetingtoPRD`），讀 `PM/Meeting/` 指定檔，萃取需求、可新增或修訂既有 R檔（動工前先列清單確認）。
 6. 產 SA：跟我說「產SA」（或 `PRDtoSA`），讀 PRD R檔，依 `SA/rules/SA撰寫規範.md` 把需求拆成功能、寫模組層 SA、登錄 `SA/SA.md`、回填 `PRD/traceability.md` 的「SA 對應」欄（動工前先列功能／模組規劃確認）。
+7. 產 SRS：跟我說「產SRS」（或 `SAtoSRS`），讀 SA 功能清單，依 `SRS/rules/SRS撰寫規範.md` 為每個功能產出一頁頁面規格（頁面代碼沿用功能編號、含 breadcrumb／頁標題／欄位／頁內 UI flow）、回填 `PRD/traceability.md` 的「SRS 對應」欄（動工前先列頁面清單確認）。
 
 ## 資料夾結構
 
@@ -25,7 +26,7 @@
 | `PM/` | iniRFP 決策：新手包 `index.html`、售前文件 `input/`、產出 `output/`、會議／訪談記錄 `Meeting/` |
 | `PRD/` | 產品需求文件；撰寫依 `PRD/rules/PRD撰寫規範.md` |
 | `SA/` | 系統分析（功能分析層）；撰寫依 `SA/rules/SA撰寫規範.md` |
-| `SRS/` | 系統需求規格（範本待補） |
+| `SRS/` | 系統需求規格（頁面 spec 層）；撰寫依 `SRS/rules/SRS撰寫規範.md` |
 | `Testing/` | 測試（範本待補） |
 
 `PM/output/iniRFP.md` 是 PRD／SA／SRS 的上游輸入——全域/非功能決策在此彙整（為 RFP 規格初稿，可能不完整，後續文件據此撰寫並補釐清）。
