@@ -30,6 +30,8 @@
 | 破壞性改動（觸發詞、結構大改） | major：`0.x` → `1.0.0`（1.0 前可用 minor 代表） |
 
 > ⚠️ **沒改 version，團隊端 `plugin update` 會「找不到更新」**——他們永遠停在舊版。
+>
+> ⚠️ **版號有兩處要同步**：除了 `plugin.json` 的 `version`，也要把 `plugins/iniproj/template/工作流程說明.html` 頂列寫死的 `<span class="ver">v0.x.x</span>` 改成同一版（手冊版號目前為硬編碼，兩處須一致）。
 
 ### 2. 驗證 manifest（push 前自檢）
 ```
