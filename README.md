@@ -8,11 +8,11 @@
 在 Claude Code 裡輸入：
 
 ```
-/plugin marketplace add shellsirius/iniProj-plugin
+/plugin marketplace add sharon-pmux/iniProj-plugin
 /plugin install iniproj
 ```
 
-> `shellsirius/iniProj-plugin` 是 GitHub `owner/repo` 簡寫；推上 GitHub 後改成你實際的帳號／倉庫名。
+> `sharon-pmux/iniProj-plugin` 是 GitHub `owner/repo` 簡寫；推上 GitHub 後改成你實際的帳號／倉庫名。
 > 也可用完整 git URL，或私有倉庫的 SSH URL。
 
 安裝後重啟（或 `/exit` 再進）Claude Code，讓 plugin 生效。

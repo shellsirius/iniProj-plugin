@@ -91,7 +91,7 @@ claude plugin list        # 看 iniproj 的 Version 是不是最新
 {
   "extraKnownMarketplaces": {
     "iniproj": {
-      "source": { "source": "github", "repo": "shellsirius/iniProj-plugin" },
+      "source": { "source": "github", "repo": "sharon-pmux/iniProj-plugin" },
       "autoUpdate": true
     }
   }
@@ -105,7 +105,7 @@ claude plugin list        # 看 iniproj 的 Version 是不是最新
 {
   "extraKnownMarketplaces": {
     "iniproj": {
-      "source": { "source": "github", "repo": "shellsirius/iniProj-plugin" },
+      "source": { "source": "github", "repo": "sharon-pmux/iniProj-plugin" },
       "autoUpdate": true
     }
   },
@@ -122,10 +122,10 @@ claude plugin list        # 看 iniproj 的 Version 是不是最新
 ## 首次安裝（新成員）
 
 ```
-claude plugin marketplace add shellsirius/iniProj-plugin
+claude plugin marketplace add sharon-pmux/iniProj-plugin
 claude plugin install iniproj@iniproj
 ```
-或在 Claude Code 裡用 `/plugin marketplace add shellsirius/iniProj-plugin` → `/plugin install iniproj`。重啟生效。
+或在 Claude Code 裡用 `/plugin marketplace add sharon-pmux/iniProj-plugin` → `/plugin install iniproj`。重啟生效。
 
 ---
 
