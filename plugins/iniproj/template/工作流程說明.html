@@ -43,6 +43,8 @@ body{
   font-size:clamp(14px,1.7vw,17px)}
 .topbar .sub{color:var(--ink-soft);font-size:12.5px;margin-left:auto}
 @media(max-width:560px){.topbar .sub{display:none}}
+.ver{font-family:var(--mono);font-size:11px;color:var(--ink-soft);background:var(--paper-2);
+  border:1px solid var(--line);padding:3px 8px;border-radius:7px;white-space:nowrap}
 .barlink{margin-left:14px;font-size:12.5px;font-family:var(--mono);text-decoration:none;
   color:var(--accent);border:1px solid var(--line);padding:5px 11px;border-radius:9px;
   background:var(--card);white-space:nowrap;transition:.16s}
@@ -249,6 +251,7 @@ footer .sign a{color:var(--accent);text-decoration:none}
 <div class="topbar">
   <div class="bar-inner">
     <span class="logo">iniProj</span>
+    <span class="ver">v0.1.6</span>
     <h1>新案開案手冊</h1>
     <span class="sub">給新 PM 的入職說明</span>
   </div>
@@ -287,11 +290,16 @@ footer .sign a{color:var(--accent);text-decoration:none}
       </a>
       <a class="nav-i" href="#s-test">
         <span class="dot">6</span>
-        <span class="nx"><b>測試</b><i>測試案例＋缺陷</i></span>
+        <span class="nx"><b>測試</b><i>測試案例</i></span>
         <span class="st ok">可用</span>
       </a>
       <span class="nav-i lock">
         <span class="dot">7</span>
+        <span class="nx"><b>缺陷追蹤</b><i>Issue</i></span>
+        <span class="st">規劃中</span>
+      </span>
+      <span class="nav-i lock">
+        <span class="dot">8</span>
         <span class="nx"><b>交接</b><i>Handoff</i></span>
         <span class="st">規劃中</span>
       </span>
@@ -301,7 +309,7 @@ footer .sign a{color:var(--accent);text-decoration:none}
         <span class="st ok">總覽</span>
       </a>
     </nav>
-    <div class="rail-note">⌁ 還剩交接一站陸續上線，位子先留著。</div>
+    <div class="rail-note">⌁ 還剩缺陷追蹤、交接兩站陸續上線，位子先留著。</div>
   </aside>
 
   <!-- ░░ CONTENT ░░ -->
@@ -683,6 +691,11 @@ footer .sign a{color:var(--accent);text-decoration:none}
         <p>這些能力會逐步擴充進這份手冊。</p>
       </div>
       <div class="roadmap">
+        <div class="rm">
+          <div class="rm-ic">🐞</div>
+          <div class="rm-tx"><b>缺陷追蹤 Issue</b><span>測試執行後的問題記錄（規範＋範本已備，skill 規劃中）</span></div>
+          <span class="soon">規劃中</span>
+        </div>
         <div class="rm">
           <div class="rm-ic">🤝</div>
           <div class="rm-tx"><b>交接 Handoff</b><span>交付給開發團隊的收尾</span></div>

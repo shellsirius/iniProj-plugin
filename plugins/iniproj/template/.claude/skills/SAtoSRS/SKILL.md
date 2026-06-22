@@ -1,6 +1,6 @@
 ---
 name: SAtoSRS
-description: 讀取 SA 功能清單（SA/SA.md 功能架構索引、各模組 SA、SA/flows/ 流程線），依 SA/rules/SRS撰寫規範.md 為每個功能產出一頁 SRS 頁面規格（含 breadcrumb、頁標題、欄位、頁內 UI flow），並回填 PRD/traceability.md 的「SRS 對應」欄。當使用者說「產SRS」「SAtoSRS」「把功能寫成頁面規格」「寫頁面 spec」，或指定某些功能／模組產 SRS 時使用。
+description: 讀取 SA 功能清單（SA/SA.md 功能架構索引、各模組 SA、SA/flows/ 流程線），依 SRS/rules/SRS撰寫規範.md 為每個功能產出一頁 SRS 頁面規格（頁標題、欄位、頁內 UI flow；breadcrumb 由功能地圖統一定義），並回填 PRD/traceability.md 的「SRS 對應」欄。當使用者說「產SRS」「SAtoSRS」「把功能寫成頁面規格」「寫頁面 spec」，或指定某些功能／模組產 SRS 時使用。
 ---
 
 # SAtoSRS
@@ -10,7 +10,7 @@ description: 讀取 SA 功能清單（SA/SA.md 功能架構索引、各模組 SA
 ## 第 0 步：先讀規範
 讀 `SRS/rules/SRS撰寫規範.md`（並順帶看 `SA/rules/SA撰寫規範.md` 了解功能編號／流程線）。規範 §七 另指向子規則檔：`srs_common_rules`（共用行為）／`srs_ui_flow_guide`（頁內流轉）／`srs_file_split_guide`（拆檔）／`srs_component_rules`（元件），撰寫時一併參照。鐵則：
 - **頁面＝SA 功能**，頁面代碼沿用功能編號，路徑 `SRS/{系統}/{模組}/{功能}.md`。
-- SRS 只寫**畫面**：頁面、breadcrumb、頁標題、欄位、元件、驗證、**頁內** UI flow。
+- SRS 只寫**畫面**：頁面、頁標題、欄位、元件、驗證、**頁內** UI flow（breadcrumb 由功能地圖統一定義，不寫於頁面）。
 - **跨功能／跨模組相依**只一行引用 SA §2，**不重寫**；流程細節看 `SA/flows/`，不重寫。
 - **頁標題逐頁寫**；**breadcrumb／選單結構由 `SRS/功能地圖.md` 統一定義，頁面不重寫**；topbar／全域導覽寫一次於 `SRS/全域-UI.md`。
 - 欄位／驗證／流轉 SA 或 PRD 未明處 → **標待釐清，不腦補**。
@@ -24,6 +24,8 @@ description: 讀取 SA 功能清單（SA/SA.md 功能架構索引、各模組 SA
 
 ### 1. 讀 SA 與既有 SRS
 讀目標功能的模組 SA、`SA/SA.md`、相關 `SA/flows/`；讀 `SRS/` 既有頁面與 `SRS/全域-UI.md`（若有），掌握已產頁面、全域 UI 慣例，避免重複。
+
+- **產前檢查（上游已備）**：讀 `PRD/traceability.md`，確認本批功能對應的 R 之「SA 對應」欄已填（SA 已產）；未填 → 提示先對該 R 產 SA，或請使用者確認，不在缺 SA 的功能上硬產 SRS。
 
 ### 1b. 盤點待釐清　★產 SRS 前置閘
 - 掃本批功能對應的 SA／R檔「待釐清項目」，**逐項列給使用者確認／補答**。
@@ -47,8 +49,8 @@ description: 讀取 SA 功能清單（SA/SA.md 功能架構索引、各模組 SA
 - 設計備註只寫本頁專屬；SA／PRD 未明處列「待釐清」。
 
 ### 4. 功能地圖與全域 UI
-- **功能地圖**（導覽權威）：首批建立 `SRS/功能地圖.md`（導覽樹＋選單階層＋breadcrumb 路徑，種子取自 `SA/SA.md`）；後續批次更新各功能涵蓋狀態（✅／🚧／⬜）。breadcrumb 一律由此檔定義。
-- **全域 UI**：首批建立 `SRS/全域-UI.md` 寫 topbar／全域導覽／頁尾等全站共用元素一次；各頁不重寫。
+- **功能地圖**（導覽權威）：範本包已附 `SRS/功能地圖.md` 骨架；**首批填寫**導覽樹＋選單階層＋breadcrumb 路徑（種子取自 `SA/SA.md`），後續批次只更新各功能涵蓋狀態（✅／🚧／⬜）。breadcrumb 一律由此檔定義。
+- **全域 UI**：範本包已附 `SRS/全域-UI.md` 骨架；**首批填寫** topbar／全域導覽／頁尾等全站共用元素一次；各頁不重寫。
 
 ### 5. 回填 traceability.md「SRS 對應」欄
 - 本批每個功能對應的 R，於「SRS 對應」欄填頁面連結。
@@ -60,6 +62,7 @@ description: 讀取 SA 功能清單（SA/SA.md 功能架構索引、各模組 SA
 
 ## 原則
 - **待釐清先澄清**：SA／R檔有未解待釐清 → 先請使用者確認再產 SRS，除非使用者堅持（步驟 1b）。
+- **產前檢查上游**：目標 R 的「SA 對應」已填再產 SRS（步驟 1）。
 - **頁面＝SA 功能**，編號沿用、全域唯一。
 - **動工前先列頁面清單確認**，再逐頁寫。
 - SRS 只寫畫面；跨功能相依／流程一行引用 SA，**不重寫**。
